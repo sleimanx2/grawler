@@ -1,0 +1,43 @@
+{
+    "name": "sleimanx2/grawler",
+    "description": "A guided html crawler with media meta extraction ",
+    "keywords": [
+        "php",
+        "html",
+        "crawler",
+        "guided"
+    ],
+    "homepage": "https://github.com/sleimanx2/grawler",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": ":sleimanx2",
+            "homepage": "http://bowtie.land",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bowtie\\Grawler\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Bowtie\\Grawler\\Test\\": "test"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
