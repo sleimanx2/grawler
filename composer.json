@@ -1,44 +1,51 @@
 {
-    "name": "sleimanx2/grawler",
-    "description": "A guided html crawler with media meta extraction ",
-    "keywords": [
-        "php",
-        "html",
-        "crawler",
-        "guided"
-    ],
-    "homepage": "https://github.com/sleimanx2/grawler",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": ":sleimanx2",
-            "homepage": "http://bowtie.land",
-            "role": "Developer"
-        }
-    ],
-    "require": {
-        "php" : ">=5.5",
-        "fabpot/goutte":"3.1.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit" : "~4.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Bowtie\\Grawler\\": "src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Bowtie\\Grawler\\Test\\": "test"
-        }
-    },
-    "scripts": {
-        "test": "phpunit"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        }
+  "name": "sleimanx2/grawler",
+  "description": "A guided html crawler with media meta extraction ",
+  "keywords": [
+    "php",
+    "html",
+    "crawler",
+    "guided"
+  ],
+  "homepage": "https://github.com/sleimanx2/grawler",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": ":sleimanx2",
+      "homepage": "http://bowtie.land",
+      "role": "Developer"
     }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "fabpot/goutte": "3.1.2",
+    "hassankhan/config": "0.8.2",
+    "vlucas/phpdotenv": "2.2.0",
+    "google/apiclient": "1.1.6",
+    "vimeo/vimeo-api": "1.2.3",
+    "njasm/soundcloud": "2.2.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "^0.9.4",
+    "phpunit/php-code-coverage": "^2.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bowtie\\Grawler\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Bowtie\\Grawler\\Test\\": "test"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
 }

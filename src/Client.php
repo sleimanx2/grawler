@@ -40,14 +40,18 @@ class Client extends BaseClient
     public function method($type)
     {
         $this->method = ucwords($type);
+
         return $this;
     }
 
     /**
      * @param $uri
+     * @return Grawler
      */
     public function download($uri)
     {
-        $this->request($this->method, $uri);
+        $crawler = $this->request($this->method, $uri);
+
+        return new Grawler($crawler, $uri);
     }
 }

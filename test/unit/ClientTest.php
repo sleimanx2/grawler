@@ -35,7 +35,7 @@ class ClientTest extends PHPUnit_Framework_TestCase
 
         $client->auth('me', '**')->download('http://example.com');
 
-        $this->assertEquals('Basic bWU6Kio=', end($this->history)['request']->getMeth('Authorization'));
+        $this->assertEquals('Basic bWU6Kio=', end($this->history)['request']->getHeaderLine('Authorization'));
     }
 
     /** @test */
@@ -46,7 +46,18 @@ class ClientTest extends PHPUnit_Framework_TestCase
         $client->method('post')->download('http://example.com');
 
         $this->assertEquals('POST', end($this->history)['request']->getMethod());
+    }
 
+
+    /** @test */
+    function it_returns_a_grawler_instance()
+    {
+
+        $client = $this->createDefaultClient();
+
+        $grawler = $client->download('http://example.com');
+
+        $this->assertInstanceOf(\Bowtie\Grawler\Grawler::class, $grawler);
     }
 
 
