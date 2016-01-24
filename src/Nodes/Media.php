@@ -38,7 +38,10 @@ abstract Class Media extends Attributes
      */
     public function __construct($url = null)
     {
+
         $this->checkIfAbsolute($url);
+
+
 
         $this->url = $url;
 
@@ -54,13 +57,20 @@ abstract Class Media extends Attributes
      */
     public function resolve()
     {
-        foreach ($this->resolvers as $resolver) {
-            $this->isValidResolver($resolver);
-
-            return (new $resolver($this->url))->loadConfig($this->config())->resolve();
+        if (!is_array($this->resolvers) or empty($this->resolvers)) {
+            return null;
         }
 
-        return false;
+        foreach ($this->resolvers as $resolver) {
+
+            $this->isValidResolver($resolver);
+
+            $resolver = new $resolver($this->url);
+
+            if ($resolver->validate($this->url)) {
+                return $resolver->loadConfig($this->config())->resolve();
+            }
+        }
     }
 
     /**

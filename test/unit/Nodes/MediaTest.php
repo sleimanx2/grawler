@@ -2,6 +2,7 @@
 
 
 use Bowtie\Grawler\Nodes\Media;
+use Bowtie\Grawler\Nodes\Resolvers\VimeoResolver;
 use Bowtie\Grawler\Nodes\Resolvers\YoutubeResolver;
 
 class MediaTest extends PHPUnit_Framework_TestCase
@@ -24,7 +25,7 @@ class MediaTest extends PHPUnit_Framework_TestCase
 
         $mediaSubClass->addResolvers(YoutubeResolver::class);
 
-        $this->assertCount(1,$mediaSubClass->resolvers());
+        $this->assertCount(3,$mediaSubClass->resolvers());
     }
 
     /**
@@ -38,10 +39,37 @@ class MediaTest extends PHPUnit_Framework_TestCase
         $mediaSubClass->addResolvers(\Bowtie\Grawler\Nodes\Video::class);
     }
 
+
+    /**
+     * @test
+     */
+    function it_returns_false_if_no_resolver_found_to_resolve()
+    {
+        $mediaSubClass = new EmptyMediaSubClass('http://example.com/home');
+
+        $this->assertEquals(null,$mediaSubClass->resolve());
+    }
+
+
+    /**
+     * @test
+     */
+    function it_validates_media_url_against_media_resolvers_searching_for_a_match()
+    {
+        $mediaSubClass = new MediaSubClass('http://example.com/home');
+
+        $this->assertEquals(null,$mediaSubClass->resolve());
+    }
+
+
 }
 
-
 class MediaSubClass extends Media
+{
+    protected $resolvers = [YoutubeResolver::class,VimeoResolver::class];
+}
+
+class EmptyMediaSubClass extends Media
 {
     protected $resolvers = [];
 }
