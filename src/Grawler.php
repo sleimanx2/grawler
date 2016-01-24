@@ -2,6 +2,7 @@
 
 namespace Bowtie\Grawler;
 
+use Bowtie\Grawler\Nodes\Audio;
 use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Link;
 use Bowtie\Grawler\Nodes\Video;
@@ -101,6 +102,26 @@ class Grawler
         return $videos;
     }
 
+    /**
+     * extract audio from dom given a path
+     *
+     * @param $path
+     * @return array
+     */
+    public function audio($path)
+    {
+        $attributes = ['src', 'href', 'content'];
+
+        $links = $this->generateLinks($path, $attributes);
+
+        $audio = array_map(function ($link) {
+            return (new Audio($link->getUri()))->loadConfig($this->config());
+        }, $links);
+
+        return $audio;
+    }
+
+
 
     /**
      * extract links from dom given a path
@@ -116,14 +137,13 @@ class Grawler
 
         // if nodes are found after filter
         if ($nodes->count()) {
-            // if the nodes found aren't of type "a" add "a" to the path and try again
+            // if the nodes found aren't of type anchors add "a" to the path and try again
             if ($nodes->first()->nodeName() !== 'a') {
-                return $this->generateLinks($path . ' a', $attributes);
+                $path = $path . ' a';
             }
-
-            return $this->generateLinks($path, $attributes);
         }
 
+        return $this->generateLinks($path, $attributes);;
     }
 
     /**
@@ -147,8 +167,6 @@ class Grawler
                     return new Link($linkNode, $this->uri);
                 }
             }
-
-            return null;
         });
 
         return array_unique(array_filter($links));
