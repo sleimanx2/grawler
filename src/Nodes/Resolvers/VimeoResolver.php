@@ -2,6 +2,7 @@
 
 namespace Bowtie\Grawler\Nodes\Resolvers;
 
+use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Video;
 use Vimeo\Vimeo;
 
@@ -40,8 +41,7 @@ class VimeoResolver extends Resolver
 
         $token = $lib->clientCredentials('private public');
 
-        if(isset($token['body']['access_token']))
-        {
+        if (isset($token['body']['access_token'])) {
             $lib->setToken($token['body']['access_token']);
         }
 
@@ -71,8 +71,16 @@ class VimeoResolver extends Resolver
         $node->title = $this->rawData['name'];
         $node->description = $this->rawData['description'];
 
-        // @toDo return an instance of images
-        $node->images = $this->rawData['pictures']['sizes'];
+        $images = [];
+
+        foreach ($this->rawData['pictures']['sizes'] as $thumb) {
+            $newImage = new Image($thumb['link']);
+            $newImage->width = $thumb['width'];
+            $newImage->height = $thumb['height'];
+            $images[] = $newImage;
+        }
+
+        $node->images = $images;
 
         $node->author = $this->rawData['user']['name'];
         $node->authorId = substr($this->rawData['user']['uri'], strrpos($this->rawData['user']['uri'], '/') + 1);

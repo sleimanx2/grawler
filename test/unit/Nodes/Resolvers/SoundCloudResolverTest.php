@@ -1,4 +1,5 @@
 <?php
+use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Resolvers\Resolver;
 use Bowtie\Grawler\Nodes\Resolvers\SoundCloudResolver;
 
@@ -29,7 +30,7 @@ class SoundCloudResolverTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_can_resolve_youtube_video_attributes()
+    public function it_can_resolve_soundcloud_audio_attributes()
     {
         $resolver = $this->initSoundCloudResolver();
 
@@ -42,8 +43,10 @@ class SoundCloudResolverTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Namito!', $audio->author);
         $this->assertEquals('103', $audio->authorId);
 
-        //@toDo test that it return instances of Image Node
-        //$this->assertEquals([], $audio->images);
+        $this->assertInstanceOf(Image::class, $audio->images[0]);
+        $this->assertEquals(null, $audio->images[0]->width);
+        $this->assertEquals(null, $audio->images[0]->height);
+
 
         $this->assertEquals('http://soundcloud.com/namito/christian-hornbostel-chemical-species-namito-remix-preview',
             $audio->url);
@@ -56,7 +59,7 @@ class SoundCloudResolverTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_returns_false_when_resolving_invalid_youtube_urls()
+    public function it_returns_false_when_resolving_invalid_soundcloud_urls()
     {
         $resolver = new SoundCloudResolver('http://example.com');
 

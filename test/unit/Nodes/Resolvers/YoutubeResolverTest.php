@@ -1,5 +1,6 @@
 <?php
 use Bowtie\Grawler\Config\Config;
+use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Resolvers\Resolver;
 use Bowtie\Grawler\Nodes\Resolvers\YoutubeResolver;
 
@@ -81,8 +82,10 @@ class YoutubeResolverTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Intel', $video->author);
         $this->assertEquals('UCk7SjrXVXAj8m8BLgzh6dGA', $video->authorId);
 
-        //@toDo test that it return instances of Image Node
-        //$this->assertEquals([], $video->images);
+
+        $this->assertInstanceOf(Image::class, $video->images[0]);
+        $this->assertEquals(120, $video->images[0]->width);
+        $this->assertEquals(90, $video->images[0]->height);
 
         $this->assertEquals('http://www.youtube.com/watch?v=eZ-js5zn-I0', $video->url);
         $this->assertEquals('http://www.youtube.com/embed/eZ-js5zn-I0', $video->embedUrl);
@@ -124,7 +127,7 @@ class YoutubeResolverTest extends PHPUnit_Framework_TestCase
         Mockery::mock(Resolver::class);
 
         $youtubeResolver = Mockery::mock(
-            YoutubeResolver::class."[doResolve,loadConfig]",
+            YoutubeResolver::class . "[doResolve,loadConfig]",
             ['https://www.youtube.com/watch?v=eZ-js5zn-I0']
         )->makePartial()->shouldAllowMockingProtectedMethods()->shouldIgnoreMissing();
 

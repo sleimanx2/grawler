@@ -1,5 +1,6 @@
 <?php
 use Bowtie\Grawler\Config\Config;
+use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Resolvers\Resolver;
 use Bowtie\Grawler\Nodes\Resolvers\VimeoResolver;
 use Bowtie\Grawler\Nodes\Resolvers\YoutubeResolver;
@@ -64,8 +65,9 @@ class VimeoResolverTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Cameron Bryson', $video->author);
         $this->assertEquals('2023887', $video->authorId);
 
-        //@toDo test that it return instances of Image Node
-        //$this->assertEquals([], $video->images);
+        $this->assertInstanceOf(Image::class, $video->images[0]);
+        $this->assertEquals(100, $video->images[0]->width);
+        $this->assertEquals(75, $video->images[0]->height);
 
         $this->assertEquals('https://vimeo.com/cameronbryson/theselfpractice', $video->url);
         $this->assertEquals('https://player.vimeo.com/video/152150724', $video->embedUrl);

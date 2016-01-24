@@ -3,6 +3,7 @@
 namespace Bowtie\Grawler\Nodes\Resolvers;
 
 
+use Bowtie\Grawler\Nodes\Image;
 use Google_Client;
 use Google_Service_YouTube;
 use Bowtie\Grawler\Nodes\Video;
@@ -46,11 +47,31 @@ class YoutubeResolver extends Resolver
         $node->provider = 'youtube';
 
         if ($this->rawData->snippet) {
+
             $node->title = $this->rawData->snippet->title;
             $node->description = $this->rawData->snippet->description;
 
-            // @toDo return an instance of images
-            $node->images = $this->rawData->snippet->thumbnails;
+            // mapping images
+            $thumbs = [
+                $this->rawData->snippet->thumbnails->getDefault(),
+                $this->rawData->snippet->thumbnails->getMedium(),
+                $this->rawData->snippet->thumbnails->getHigh()
+            ];
+
+            $images = [];
+
+            foreach($thumbs as $thumb)
+            {
+                $newImage = new Image($thumb->url);
+                $newImage->width = $thumb->width;
+                $newImage->height = $thumb->height;
+
+
+                $images[] =$newImage;
+            }
+
+            $node->images = $images;
+            // end of mapping images
 
             $node->author = $this->rawData->snippet->channelTitle;
             $node->authorId = $this->rawData->snippet->channelId;
@@ -78,7 +99,7 @@ class YoutubeResolver extends Resolver
         $client = new Google_Client();
         $client->setApplicationName("Grawler");
 
-        $client->setDeveloperKey( $this->config()->get('youtubeKey'));
+        $client->setDeveloperKey($this->config()->get('youtubeKey'));
 
         $youtube = new Google_Service_YouTube($client);
 

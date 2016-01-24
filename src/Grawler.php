@@ -77,7 +77,7 @@ class Grawler
         $links = $this->generateLinks($path, $attributes);
 
         $images = array_map(function ($link) {
-            return (new Image($link->getUri()))->loadConfig($this->config());
+           return (new Image($link->getUri()))->loadConfig($this->config());
         }, $links);
 
         return $images;

@@ -4,6 +4,7 @@ namespace Bowtie\Grawler\Nodes\Resolvers;
 
 
 use Bowtie\Grawler\Nodes\Audio;
+use Bowtie\Grawler\Nodes\Image;
 use Njasm\Soundcloud\Soundcloud;
 
 class SoundCloudResolver extends Resolver
@@ -83,7 +84,7 @@ class SoundCloudResolver extends Resolver
         $node->description = $this->rawData['description'];
         $node->url = $this->rawData['permalink_url'];
         $node->embedUrl = "https://w.soundcloud.com/player/?url=" . $this->rawData['uri'];
-        $node->images = [['url' => $this->rawData['permalink_url']]];
+        $node->images = [new Image($this->rawData['permalink_url'])];
         $node->author = $this->rawData['user']['username'];
         $node->authorId = $this->rawData['user']['id'];
         $node->duration = gmdate("H:i:s", $this->rawData['duration'] / 1000);
