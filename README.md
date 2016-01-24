@@ -13,42 +13,37 @@ $ composer require sleimanx2/grawler
 ## Usage
 
 
-###getting the page dom
+### getting the page dom
 
-```
+```php
 $client = Client();
 
 $grawler = $client->download('http://example.com');
-
 ```
-###finding basic attributes
+### finding basic attributes
 
 
-```
+```php
 $grawler->title();
+```
 
-```
-```
+```php
 // provide a css path to find the attribute
 $grawler->body($path = '.main-content');
-
 ```
 
 ### finding media
 
-```
+```php
 $grawler->images('.content img');
-
 ```
 
-```
+```php
 $grawler->videos('iframe');
-
 ```
 
-```
+```php
 $grawler->audio('.audio iframe');
-
 ```
 
 
@@ -73,7 +68,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md)
 
 ## Security
 
-If you discover any security related issues, please email sleiman/[at]/bowtie/[dot]/land instead of using the issue tracker.
+If you discover any security related issues, please email sleiman@bowtie.land instead of using the issue tracker.
 
 
 ## License
