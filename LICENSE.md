@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright (c) 2015 sleiman sleiman sleiman@bowtie.land
+Copyright (c) 2015 sleiman sleiman
 
 > Permission is hereby granted, free of charge, to any person obtaining a copy
 > of this software and associated documentation files (the "Software"), to deal
