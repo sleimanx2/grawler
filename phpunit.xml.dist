@@ -5,6 +5,12 @@
         <testsuite name="all">
             <directory suffix="Test.php">test/</directory>
         </testsuite>
+        <testsuite name="unit">
+            <directory suffix="Test.php">test/unit</directory>
+        </testsuite>
+        <testsuite name="integration">
+            <directory suffix="Test.php">test/integration</directory>
+        </testsuite>
     </testsuites>
     <filter>
         <whitelist>
