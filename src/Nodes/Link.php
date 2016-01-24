@@ -14,7 +14,6 @@ class Link extends DOMLink
      *
      * @param DOMElement $node
      * @param string $currentUri
-     * @param string $rawUri
      */
     public function __construct(DOMElement $node, $currentUri)
     {
@@ -22,4 +21,8 @@ class Link extends DOMLink
     }
 
 
+    public function __toString()
+    {
+        return $this->getUri();
+    }
 }

@@ -39,6 +39,21 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("body\nfrom\nmultiple\nnodes", $body);
     }
 
+
+    /** @test */
+    function it_can_extract_the_selected_links_from_dom()
+    {
+        $grawler = $this->initGrawler('links-dom','http://example.com/news/latest/');
+
+        $links = $grawler->links('.latest-articles');
+
+        $this->assertEquals(3, count($links));
+
+        $this->assertEquals('http://example.com/news/latest/news-1', $links[0]->getUri());
+        $this->assertEquals('http://example.com/news/news-2', $links[1]->getUri());
+        $this->assertEquals('http://example.com/news-3', $links[2]->getUri());
+    }
+
     /** @test */
     function it_can_extract_the_selected_images_from_dom()
     {
@@ -49,9 +64,8 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(4, count($images));
 
-
         $this->assertEquals('http://example.com/images/full.png', $images[0]->url);
-        $this->assertEquals('http://example.com/images/full.png', $images[3]->url);
+        $this->assertEquals('http://example.com/images/full-4.png', $images[3]->url);
 
     }
 
@@ -63,7 +77,8 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $videos = $grawler->videos('.video');
 
-        $this->assertEquals(4, count($videos));
+        // we assert 3 because we expect the grawler to remove duplicates
+        $this->assertEquals(3, count($videos));
 
         $this->assertEquals('http://example.com/videos/watch?v=NU7W7qe2R0A', $videos[0]->url);
         $this->assertEquals('https://www.youtube.com/watch?v=NU7W7qe2R0A', $videos[3]->url);

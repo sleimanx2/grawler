@@ -2,10 +2,10 @@
 
 namespace Bowtie\Grawler;
 
-use Bowtie\Grawler\Config\ConfigAccess;
 use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Link;
 use Bowtie\Grawler\Nodes\Video;
+use Bowtie\Grawler\Config\ConfigAccess;
 use Symfony\Component\DomCrawler\Crawler;
 
 class Grawler
@@ -36,6 +36,8 @@ class Grawler
     }
 
     /**
+     * extract title from dom given a path
+     *
      * @param null|string $path
      * @return string
      */
@@ -47,6 +49,8 @@ class Grawler
     }
 
     /**
+     * extract body from dom given a path
+     *
      * @param $path
      * @return string
      */
@@ -59,9 +63,15 @@ class Grawler
         return implode("\n", $content);
     }
 
+    /**
+     * extract images from dom given a path
+     *
+     * @param $path
+     * @return array
+     */
     public function images($path)
     {
-        $attributes = ['data-image','data-url','data-src','data-highres','src','href'];
+        $attributes = ['data-image', 'data-url', 'data-src', 'data-highres', 'src', 'href'];
 
         $links = $this->generateLinks($path, $attributes);
 
@@ -72,6 +82,12 @@ class Grawler
         return $images;
     }
 
+    /**
+     * extract videos from dom given a path
+     *
+     * @param $path
+     * @return array
+     */
     public function videos($path)
     {
         $attributes = ['src', 'href', 'content'];
@@ -86,8 +102,28 @@ class Grawler
     }
 
 
-    public function links($areas)
+    /**
+     * extract links from dom given a path
+     *
+     * @param $path
+     * @return array
+     */
+    public function links($path)
     {
+        $attributes = ['href'];
+
+        $nodes = $this->DOM->filter($path);
+
+        // if nodes are found after filter
+        if ($nodes->count()) {
+            // if the nodes found aren't of type "a" add "a" to the path and try again
+            if ($nodes->first()->nodeName() !== 'a') {
+                return $this->generateLinks($path . ' a', $attributes);
+            }
+
+            return $this->generateLinks($path, $attributes);
+        }
+
     }
 
     /**
@@ -97,6 +133,7 @@ class Grawler
      */
     private function generateLinks($path, $attributes)
     {
+
         $links = $this->DOM->filter($path)->each(function ($node) use ($attributes) {
             foreach ($attributes as $attribute) {
 
