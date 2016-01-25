@@ -67,7 +67,9 @@ abstract Class Media extends Attributes
             $resolver = new $resolver($this->url);
 
             if ($resolver->validate($this->url)) {
-                return $resolver->loadConfig($this->config())->resolve();
+
+                $this->add($resolver->loadConfig($this->config())->resolve()) ;
+                return $this;
             }
         }
     }

@@ -16,7 +16,9 @@ $ composer require sleimanx2/grawler
 ##### getting the page dom
 
 ```php
-$client = Client();
+require_once('vendor/autoload.php');
+
+$client = new Bowtie\Grawler\Client();
 
 $grawler = $client->download('http://example.com');
 ```

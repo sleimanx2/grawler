@@ -24,11 +24,11 @@ abstract Class Attributes extends Collection
     /**
      * @param $attributes
      */
-    public function add($attributes){
+    public function add($attributes)
+    {
 
-        foreach($attributes as $name => $value)
-        {
-            $this->set($name,$value);
+        foreach ($attributes as $name => $value) {
+            $this->set($name, $value);
         }
     }
 
@@ -52,16 +52,14 @@ abstract Class Attributes extends Collection
     /**
      * @param $name
      * @param $value
-     * @return mixed
      */
     public function set($name, $value)
     {
-
         if (isset($this->items[$name])) {
-            return $this->items[$name] = $value;
+            $this->items[$name] = $value;
+        } else {
+            throw new InvalidArgumentException('You are trying to set an invalid attribute');
         }
-
-        throw new InvalidArgumentException('You are trying to set an invalid attribute');
     }
 
 }
