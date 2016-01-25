@@ -23,7 +23,8 @@ class AttributesTest extends PHPUnit_Framework_TestCase
     function it_can_set_a_valid_attribute()
     {
         $attributesSubclass = new AttributeSubClass();
-        $this->assertEquals('new title',$attributesSubclass->set('title','new title'));
+        $attributesSubclass->set('title','new title');
+        $this->assertEquals('new title',$attributesSubclass->title);
     }
 
     /**
