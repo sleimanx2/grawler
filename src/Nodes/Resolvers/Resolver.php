@@ -2,7 +2,6 @@
 
 namespace Bowtie\Grawler\Nodes\Resolvers;
 
-use Bowtie\Grawler\Config\Config;
 use Bowtie\Grawler\Config\ConfigAccess;
 use Bowtie\Grawler\Nodes\Media;
 

@@ -41,8 +41,6 @@ abstract Class Media extends Attributes
 
         $this->checkIfAbsolute($url);
 
-
-
         $this->url = $url;
 
         parent::__construct($this->makeAttributes());
