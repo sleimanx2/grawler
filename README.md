@@ -13,14 +13,15 @@ $ composer require sleimanx2/grawler
 ## Basic Usage
 
 
-### getting the page dom
+##### getting the page dom
 
 ```php
 $client = Client();
 
 $grawler = $client->download('http://example.com');
 ```
-### finding basic attributes
+
+##### finding basic attributes
 
 
 ```php
@@ -32,7 +33,7 @@ $grawler->title();
 $grawler->body($path = '.main-content');
 ```
 
-### finding media
+##### finding media
 
 ```php
 $grawler->images('.content img');
@@ -48,11 +49,11 @@ $grawler->audio('.audio iframe');
 
 ## Configuration
 
-### Client
+### Client Config
 
 ##### Set user agent
 ```php
-$client->agent('Googlebot/2.1')->download('http://example.com')
+$client->agent('Googlebot/2.1')->download('http://example.com');
 ```
 Recomended : http://webmasters.stackexchange.com/questions/6205/what-user-agent-should-i-set
 
@@ -64,13 +65,42 @@ $client->auth('me', '**')
 you can change the auth type as follow
 
 ```php
-$client->auth('me', '**', $type = 'basic')
+$client->auth('me', '**', $type = 'basic');
 ```
 
 ##### Set request method
 
 ```php
-$client->method('post')
+$client->method('post');
+```
+
+### Grawler config
+
+By default the grawler tries to access those environment variables
+```
+GRAWLER_YOUTUBE_KEY
+
+GRAWLER_VIMEO_KEY
+GRAWLER_VIMEO_SECRET
+
+GRAWLER_SOUNDCLOUD_KEY
+GRAWLER_SOUNDCLOUD_SECRET
+```
+if you don't use env vars  you can load configuration as follow.
+
+```php
+$config = [
+'youtubeKey'   =>'',
+'soundcloudKey'=>''
+
+'vimeoKey'    => '',
+'vimeoSecret' => '',
+
+'soundcloudKey'    => '',
+'soundcloudSecret' => '',
+];
+
+$grawler->loadConfig($config);
 ```
 
 
