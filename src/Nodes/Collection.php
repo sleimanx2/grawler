@@ -20,7 +20,7 @@ abstract class Collection implements ArrayAccess, Countable, IteratorAggregate
     /**
      * @var array
      */
-    protected $items;
+    protected $items = [];
 
     /**
      * Collection constructor.

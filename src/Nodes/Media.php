@@ -31,6 +31,7 @@ abstract Class Media extends Attributes
      */
     protected $resolvers = [];
 
+
     /**
      * Media constructor.
      *
@@ -90,7 +91,6 @@ abstract Class Media extends Attributes
             throw new InvalidArgumentException('Resolvers can only be an array of string strings');
         }
     }
-
 
     /**
      * returns the lists of resolvers class names
