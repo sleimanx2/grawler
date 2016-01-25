@@ -9,6 +9,11 @@ class Client extends BaseClient
     /** @var  http method */
     protected $method = 'GET';
 
+
+    /** @var array */
+    protected $headers = [];
+
+
     /**
      * @param $name
      * @return $this

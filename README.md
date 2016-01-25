@@ -10,7 +10,7 @@ Via Composer
 $ composer require sleimanx2/grawler
 ```
 
-## Usage
+## Basic Usage
 
 
 ### getting the page dom
@@ -46,6 +46,33 @@ $grawler->videos('iframe');
 $grawler->audio('.audio iframe');
 ```
 
+## Configuration
+
+### Client
+
+##### Set user agent
+```php
+$client->agent('Googlebot/2.1')->download('http://example.com')
+```
+Recomended : http://webmasters.stackexchange.com/questions/6205/what-user-agent-should-i-set
+
+##### Set request auth
+
+```php
+$client->auth('me', '**')
+```
+you can change the auth type as follow
+
+```php
+$client->auth('me', '**', $type = 'basic')
+```
+
+##### Set request method
+
+```php
+$client->method('post')
+```
+
 
 ## Testing
 
@@ -53,8 +80,6 @@ $grawler->audio('.audio iframe');
 ``` bash
 $ phpunit --testsuite unit
 ```
-
-
 
 ``` bash
 $ phpunit --testsuite integration
