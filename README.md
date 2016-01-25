@@ -47,6 +47,86 @@ $grawler->videos('iframe');
 $grawler->audio('.audio iframe');
 ```
 
+## Resolving media attributes
+
+In order resolve media attributes you need to [load providers's configuration](#grawler-config)
+
+#### videos
+
+Current video resolvers (youtube , vimeo)
+
+```php
+$videos = $grawler->videos('iframe')->resolve();
+```
+then you can access videos attributes as follow
+```php
+foreach($videos as $video)
+{
+  $video->id; // the video provider id
+  $video->title;
+  $video->description;
+  $video->url;
+  $video->embedUrl;
+  $video->url;
+  $video->images; // Collection of Image instances
+  $video->author;
+  $video->authorId;
+  $video->duration;
+  $video->provider; //video source
+}
+```
+
+you can also resolve videos individually  as follow
+
+```php
+$videos = $grawler->videos('iframe')
+
+foreach($videos as $video)
+{
+	$video->resolve();
+    $video->title;
+    //...
+}
+```
+
+#### audio
+
+Current video resolvers (soundcloud)
+
+```php
+$audio = $grawler->audio('.audio iframe')->resolve();
+```
+then you can access videos attributes as follow
+```php
+foreach($audio as $track)
+{
+  $track->id; // the video provider id
+  $track->title;
+  $track->description;
+  $track->url;
+  $track->embedUrl;
+  $track->url;
+  $track->images; // Collection of Image instances
+  $track->author;
+  $track->authorId;
+  $track->duration;
+  $track->provider; //video source
+}
+```
+
+you can also resolve audio individually  as follow
+
+```php
+$track = $grawler->track('.audio iframe')
+
+foreach($audio as $track)
+{
+	$track->resolve();
+    $track->title;
+    //...
+}
+```
+
 ## Configuration
 
 ### Client Config
@@ -74,7 +154,7 @@ $client->auth('me', '**', $type = 'basic');
 $client->method('post');
 ```
 
-### Grawler config
+### <a name="grawler-config"></a> Grawler config
 
 By default the grawler tries to access those environment variables
 ```
