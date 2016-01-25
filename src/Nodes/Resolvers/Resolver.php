@@ -38,7 +38,6 @@ abstract class Resolver
      */
     protected $resolved;
 
-
     /**
      * the media node that the resolver resolves (Audio,Image,Video)
      *
@@ -87,7 +86,6 @@ abstract class Resolver
 
         if ($this->rawData = $this->doResolve()) {
             $this->resolved = true;
-
             return $this->map();
         }
 
@@ -115,6 +113,15 @@ abstract class Resolver
      */
     abstract protected function map();
 
+    /**
+     * check if the url was resolved
+     *
+     * @return bool
+     */
+    public function isResolved()
+    {
+        return $this->resolved;
+    }
     /**
      *  reset previous data
      */
