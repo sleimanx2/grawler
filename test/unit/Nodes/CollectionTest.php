@@ -45,22 +45,6 @@ class CollectionTest extends PHPUnit_Framework_TestCase
         $mock->title;
     }
 
-    /** @test */
-    function it_can_check_if_an_argument_is_an_assoc_array()
-    {
-
-        $collection = new CollectionSubClass();
-
-        $reflection = new \ReflectionClass(get_class($collection));
-        $method = $reflection->getMethod('isAssocArray');
-        $method->setAccessible(true);
-
-        $isAssoc = $method->invokeArgs($collection, $args = [['title' => 'one', 'body' => 'two']]);
-        $this->assertTrue($isAssoc);
-
-        $isAssoc = $method->invokeArgs($collection, $args = [['one','two']]);
-        $this->assertFalse($isAssoc);
-    }
 
     /** @test */
     function it_can_get_all_items_keys()

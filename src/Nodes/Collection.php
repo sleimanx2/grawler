@@ -167,15 +167,6 @@ abstract class Collection implements ArrayAccess, Countable, IteratorAggregate
         }, $this->items);
     }
 
-    /**
-     * @param $items
-     * @return bool
-     */
-    protected function isAssocArray($items)
-    {
-        // check if the given argument is an associative array
-        return !is_array($items) or array_keys($items) !== range(0, count($items) - 1);
-    }
 
     /**
      * sets a value in the items array

@@ -24,7 +24,7 @@ class MediaCollection extends Collection
      */
     public function add($media)
     {
-        $media = $this->isAssocArray($media) ? [$media] : $media;
+        $media = $this->isAssocArray($media) ? [$media]  : $media;
 
         foreach ($media as $offset => $value) {
             $this->set($offset, $value);
@@ -58,12 +58,22 @@ class MediaCollection extends Collection
                 } else {
                     $this->items[$offset] = $value;
                 }
-                
+
             } else {
                 throw new InvalidArgumentException;
             }
         }
 
+    }
+
+    /**
+     * @param $items
+     * @return bool
+     */
+    private function isAssocArray($items)
+    {
+        // check if the given argument is an associative array
+        return !is_array($items) or array_keys($items) !== range(0, count($items) - 1);
     }
 
 }

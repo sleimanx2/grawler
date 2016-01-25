@@ -39,6 +39,22 @@ class MediaCollectionTest extends PHPUnit_Framework_TestCase
         $this->assertCount(1,$collection);
     }
 
+    /** @test */
+    function it_can_check_if_an_argument_is_an_assoc_array()
+    {
+
+        $collection = new MediaCollection();
+
+        $reflection = new \ReflectionClass(get_class($collection));
+        $method = $reflection->getMethod('isAssocArray');
+        $method->setAccessible(true);
+
+        $isAssoc = $method->invokeArgs($collection, $args = [['title' => 'one', 'body' => 'two']]);
+        $this->assertTrue($isAssoc);
+
+        $isAssoc = $method->invokeArgs($collection, $args = [['one','two']]);
+        $this->assertFalse($isAssoc);
+    }
 
     /**
      * @test

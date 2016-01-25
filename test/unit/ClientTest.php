@@ -6,7 +6,6 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 
 class ClientTest extends PHPUnit_Framework_TestCase

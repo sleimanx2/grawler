@@ -21,6 +21,9 @@ abstract Class Attributes extends Collection
         parent::__construct($items);
     }
 
+    /**
+     * @param $attributes
+     */
     public function add($attributes){
 
         foreach($attributes as $name => $value)
@@ -29,10 +32,10 @@ abstract Class Attributes extends Collection
         }
     }
 
-
     /**
      * Gets the value of an attribute from the attributes array.
      *
+     * @param $name
      * @param mixed $default The default to return if the field doesn't exist.
      * @return mixed
      */

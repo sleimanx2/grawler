@@ -86,8 +86,9 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         // we assert 3 because we expect the grawler to remove duplicates
         $this->assertEquals(3, count($videos));
 
+
         $this->assertEquals('http://example.com/videos/watch?v=NU7W7qe2R0A', $videos[0]->url);
-        $this->assertEquals('https://www.youtube.com/watch?v=NU7W7qe2R0A', $videos[3]->url);
+        $this->assertEquals('https://www.youtube.com/watch?v=NU7W7qe2R0A', $videos[2]->url);
     }
 
 
@@ -103,7 +104,7 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(3, count($audio));
 
         $this->assertEquals('http://example.com/audio/listen?a=NU7W7qe2R0A', $audio[0]->url);
-        $this->assertEquals('https://www.soundcloud.com/listen?a=NU7W7qe2R0A', $audio[3]->url);
+        $this->assertEquals('https://www.soundcloud.com/listen?a=NU7W7qe2R0A', $audio[2]->url);
     }
 
 

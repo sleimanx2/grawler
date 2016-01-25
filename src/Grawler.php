@@ -5,6 +5,7 @@ namespace Bowtie\Grawler;
 use Bowtie\Grawler\Nodes\Audio;
 use Bowtie\Grawler\Nodes\Image;
 use Bowtie\Grawler\Nodes\Link;
+use Bowtie\Grawler\Nodes\MediaCollection;
 use Bowtie\Grawler\Nodes\Video;
 use Bowtie\Grawler\Config\ConfigAccess;
 use Symfony\Component\DomCrawler\Crawler;
@@ -80,7 +81,7 @@ class Grawler
            return (new Image($link->getUri()))->loadConfig($this->config());
         }, $links);
 
-        return $images;
+        return new MediaCollection($images);
     }
 
     /**
@@ -99,7 +100,8 @@ class Grawler
             return (new Video($link->getUri()))->loadConfig($this->config());
         }, $links);
 
-        return $videos;
+
+        return new MediaCollection($videos);
     }
 
     /**
@@ -118,7 +120,7 @@ class Grawler
             return (new Audio($link->getUri()))->loadConfig($this->config());
         }, $links);
 
-        return $audio;
+        return new MediaCollection($audio);
     }
 
 
@@ -169,7 +171,7 @@ class Grawler
             }
         });
 
-        return array_unique(array_filter($links));
+        return array_values(array_unique(array_filter($links)));
     }
 
 }
