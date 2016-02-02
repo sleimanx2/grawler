@@ -60,6 +60,8 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/news/latest/news-1', $links[0]->getUri());
         $this->assertEquals('http://example.com/news/news-2', $links[1]->getUri());
         $this->assertEquals('http://example.com/news-3', $links[2]->getUri());
+
+        $this->assertEquals([],$grawler->links(""));
     }
 
 
@@ -75,6 +77,10 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://example.com/images/full.png', $images[0]->url);
         $this->assertEquals('http://example.com/images/full-4.png', $images[3]->url);
+
+
+        $images = $grawler->images('');
+        $this->assertEquals(0, count($images));
 
     }
 
@@ -92,6 +98,10 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://example.com/videos/watch?v=NU7W7qe2R0A', $videos[0]->url);
         $this->assertEquals('https://www.youtube.com/watch?v=NU7W7qe2R0A', $videos[2]->url);
+
+
+        $videos = $grawler->videos('');
+        $this->assertEquals(0, count($videos));
     }
 
 
@@ -108,6 +118,10 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://example.com/audio/listen?a=NU7W7qe2R0A', $audio[0]->url);
         $this->assertEquals('https://www.soundcloud.com/listen?a=NU7W7qe2R0A', $audio[2]->url);
+
+
+        $audio = $grawler->audio('');
+        $this->assertEquals(0, count($audio));
     }
 
 

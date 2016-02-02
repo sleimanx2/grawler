@@ -46,7 +46,7 @@ class Grawler
     public function title($path = 'title')
     {
         if (!$path) {
-            return null;
+            return "";
         }
 
         $title = $this->DOM->filter($path)->first()->text();
@@ -82,8 +82,9 @@ class Grawler
     public function images($path)
     {
         if (!$path) {
-            return null;
+            return new MediaCollection([]);
         }
+
 
         $attributes = ['data-image', 'data-url', 'data-src', 'data-highres', 'src', 'href'];
 
@@ -105,8 +106,9 @@ class Grawler
     public function videos($path)
     {
         if (!$path) {
-            return null;
+            return new MediaCollection([]);
         }
+
 
         $attributes = ['src', 'href', 'content'];
 
@@ -129,9 +131,9 @@ class Grawler
     public function audio($path)
     {
         if (!$path) {
-            return null;
+            return new MediaCollection([]);
         }
-        
+
         $attributes = ['src', 'href', 'content'];
 
         $links = $this->generateLinks($path, $attributes);
@@ -152,6 +154,10 @@ class Grawler
      */
     public function links($path)
     {
+        if (!$path) {
+            return [];
+        }
+
         $attributes = ['href'];
 
         $nodes = $this->DOM->filter($path);
