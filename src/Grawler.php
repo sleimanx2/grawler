@@ -58,6 +58,10 @@ class Grawler
      */
     public function body($path)
     {
+        if (!$path) {
+            return "";
+        }
+        
         $content = $this->DOM->filter($path)->each(function ($node) {
             return trim($node->text());
         });
@@ -78,7 +82,7 @@ class Grawler
         $links = $this->generateLinks($path, $attributes);
 
         $images = array_map(function ($link) {
-           return (new Image($link->getUri()))->loadConfig($this->config());
+            return (new Image($link->getUri()))->loadConfig($this->config());
         }, $links);
 
         return new MediaCollection($images);
@@ -122,7 +126,6 @@ class Grawler
 
         return new MediaCollection($audio);
     }
-
 
 
     /**

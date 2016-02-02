@@ -36,6 +36,9 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $body = $grawler->body('p');
         $this->assertEquals("body\nfrom\nmultiple\nnodes", $body);
+
+        $body = $grawler->body(null);
+        $this->assertEquals("", $body);
     }
 
 
