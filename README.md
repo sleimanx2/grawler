@@ -58,6 +58,7 @@ In order resolve media attributes you need to [load providers's configuration](#
 Current video resolvers (youtube , vimeo)
 
 ```php
+// resolve all videos at once 
 $videos = $grawler->videos('iframe')->resolve();
 ```
 then you can access videos attributes as follow
@@ -69,7 +70,6 @@ foreach($videos as $video)
   $video->description;
   $video->url;
   $video->embedUrl;
-  $video->url;
   $video->images; // Collection of Image instances
   $video->author;
   $video->authorId;
@@ -85,9 +85,9 @@ $videos = $grawler->videos('iframe')
 
 foreach($videos as $video)
 {
-	$video->resolve();
-    $video->title;
-    //...
+  $video->resolve();
+  $video->title;
+  //...
 }
 ```
 
@@ -96,6 +96,7 @@ foreach($videos as $video)
 Current video resolvers (soundcloud)
 
 ```php
+// resolve all audio at once 
 $audio = $grawler->audio('.audio iframe')->resolve();
 ```
 then you can access videos attributes as follow
@@ -107,8 +108,7 @@ foreach($audio as $track)
   $track->description;
   $track->url;
   $track->embedUrl;
-  $track->url;
-  $track->images; // Collection of Image instances
+  $track->images; // Collection of cover photo instances
   $track->author;
   $track->authorId;
   $track->duration;
@@ -123,11 +123,30 @@ $track = $grawler->track('.audio iframe')
 
 foreach($audio as $track)
 {
-	$track->resolve();
-    $track->title;
-    //...
+  $track->resolve();
+  $track->title;
+  //...
 }
 ```
+
+
+## Resolving page urls
+
+
+```php
+$links = $grawler->links('.main thumb a')
+
+foreach($links as $link)
+{
+  print $link
+  //or
+  print $link->uri
+  //or
+  print $link->getUri()
+}
+```
+
+
 
 ## Configuration
 
@@ -172,14 +191,14 @@ if you don't use env vars  you can load configuration as follow.
 
 ```php
 $config = [
-'youtubeKey'   =>'',
-'soundcloudKey'=>''
+  'youtubeKey'   =>'',
+  'soundcloudKey'=>''
 
-'vimeoKey'    => '',
-'vimeoSecret' => '',
+  'vimeoKey'    => '',
+  'vimeoSecret' => '',
 
-'soundcloudKey'    => '',
-'soundcloudSecret' => '',
+  'soundcloudKey'    => '',
+  'soundcloudSecret' => '',
 ];
 
 $grawler->loadConfig($config);
