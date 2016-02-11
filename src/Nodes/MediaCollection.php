@@ -16,6 +16,8 @@ class MediaCollection extends Collection
         foreach ($this->items as $item) {
             $item->resolve();
         }
+
+        return $this;
     }
 
 
