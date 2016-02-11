@@ -25,4 +25,17 @@ class Link extends DOMLink
     {
         return $this->getUri();
     }
+
+    /**
+     * @param $name
+     * @return string
+     * @throws
+     */
+    public function __get($name)
+    {
+        if($name == 'uri')
+        {
+            return $this->getUri();
+        }
+    }
 }
