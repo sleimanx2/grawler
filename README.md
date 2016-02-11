@@ -58,6 +58,7 @@ In order resolve media attributes you need to [load providers's configuration](#
 Current video resolvers (youtube , vimeo)
 
 ```php
+// resolve all videos at once 
 $videos = $grawler->videos('iframe')->resolve();
 ```
 then you can access videos attributes as follow
@@ -69,7 +70,6 @@ foreach($videos as $video)
   $video->description;
   $video->url;
   $video->embedUrl;
-  $video->url;
   $video->images; // Collection of Image instances
   $video->author;
   $video->authorId;
@@ -96,6 +96,7 @@ foreach($videos as $video)
 Current video resolvers (soundcloud)
 
 ```php
+// resolve all audio at once 
 $audio = $grawler->audio('.audio iframe')->resolve();
 ```
 then you can access videos attributes as follow
@@ -107,8 +108,7 @@ foreach($audio as $track)
   $track->description;
   $track->url;
   $track->embedUrl;
-  $track->url;
-  $track->images; // Collection of Image instances
+  $track->images; // Collection of cover photo instances
   $track->author;
   $track->authorId;
   $track->duration;
@@ -128,6 +128,25 @@ foreach($audio as $track)
     //...
 }
 ```
+
+
+## Resolving page urls
+
+
+```php
+$track = $grawler->links('.main thumb a')
+
+foreach($links as $link)
+{
+	print $link
+    //or
+    print $link->uri
+    //or
+    print $link->getUri()
+}
+```
+
+
 
 ## Configuration
 
@@ -213,4 +232,3 @@ If you discover any security related issues, please email sleiman@bowtie.land in
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-
