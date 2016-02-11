@@ -15,14 +15,14 @@ abstract Class Media extends Attributes
      *
      * @var null
      */
-    public $url;
+    public $baseUrl;
 
     /**
-     * Media attributes
+     * Media attributes with default values
      *
      * @var array
      */
-    protected $attributes = [];
+    protected $attributes = ['url'];
 
     /**
      * Media resolvers
@@ -35,16 +35,15 @@ abstract Class Media extends Attributes
     /**
      * Media constructor.
      *
-     * @param $url
+     * @param null|string $baseUrl
      */
-    public function __construct($url = null)
+    public function __construct($baseUrl = "")
     {
-
-        $this->checkIfAbsolute($url);
-
-        $this->url = $url;
+        $this->checkIfAbsolute($baseUrl);
 
         parent::__construct($this->makeAttributes());
+
+        $this->url = $this->baseUrl = $baseUrl;
     }
 
     /**
@@ -64,9 +63,9 @@ abstract Class Media extends Attributes
 
             $this->isValidResolver($resolver);
 
-            $resolver = new $resolver($this->url);
+            $resolver = new $resolver($this->baseUrl);
 
-            if ($resolver->validate($this->url)) {
+            if ($resolver->validate($this->baseUrl)) {
 
                 $this->add($resolver->loadConfig($this->config())->resolve()) ;
                 return $this;
@@ -81,6 +80,7 @@ abstract Class Media extends Attributes
      */
     public function addResolvers($resolvers)
     {
+
         $resolvers = is_array($resolvers) ? $resolvers : [$resolvers];
 
         foreach ($resolvers as $resolver) {

@@ -1,16 +1,20 @@
 <?php
 namespace Bowtie\Grawler\Nodes;
 
-
 use InvalidArgumentException;
 
 abstract Class Attributes extends Collection
 {
 
-    protected $attributes = [];
+    /**
+     * default attributes setup
+     *
+     * @var array
+     */
+    protected $attributes;
 
     /**
-     * Attributes constructor.
+     * attributes constructor.
      *
      * @param array $items
      */

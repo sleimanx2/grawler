@@ -77,6 +77,8 @@ class SoundCloudResolver extends Resolver
      */
     protected function map()
     {
+
+
         $node = new $this->resolves;
 
         $node->id = $this->rawData['id'];

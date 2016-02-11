@@ -21,6 +21,7 @@ class MediaTest extends PHPUnit_Framework_TestCase
     /** @test */
     function it_can_add_valid_resolvers_to_the_subclass_list()
     {
+
         $mediaSubClass = new MediaSubClass();
 
         $mediaSubClass->addResolvers(YoutubeResolver::class);
