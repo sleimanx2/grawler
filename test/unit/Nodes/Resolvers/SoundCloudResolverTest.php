@@ -43,6 +43,8 @@ class SoundCloudResolverTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('Namito!', $audio->author);
         $this->assertEquals('103', $audio->authorId);
 
+        $this->assertEquals('Namito', $audio->genre);
+
         $this->assertInstanceOf(Image::class, $audio->images[0]);
         $this->assertEquals(null, $audio->images[0]->width);
         $this->assertEquals(null, $audio->images[0]->height);
@@ -50,8 +52,12 @@ class SoundCloudResolverTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals('http://soundcloud.com/namito/christian-hornbostel-chemical-species-namito-remix-preview',
             $audio->url);
+
         $this->assertEquals('https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/243208091',
             $audio->embedUrl);
+
+        $this->assertEquals('https://api.soundcloud.com/tracks/243208091/stream',
+            $audio->streamUrl);
 
         $this->assertEquals('00:03:12', $audio->duration);
 

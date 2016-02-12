@@ -92,7 +92,7 @@ class SoundCloudResolver extends Resolver
         $node->provider = 'soundcloud';
         $node->streamUrl = $this->rawData['stream_url'];
         $node->genre = $this->rawData['genre'];
-        
+
         return $node;
     }
 }
