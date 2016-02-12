@@ -78,7 +78,6 @@ class SoundCloudResolver extends Resolver
     protected function map()
     {
 
-
         $node = new $this->resolves;
 
         $node->id = $this->rawData['id'];
@@ -91,7 +90,9 @@ class SoundCloudResolver extends Resolver
         $node->authorId = $this->rawData['user']['id'];
         $node->duration = gmdate("H:i:s", $this->rawData['duration'] / 1000);
         $node->provider = 'soundcloud';
-
+        $node->streamUrl = $this->rawData['stream_url'];
+        $node->genre = $this->rawData['genre'];
+        
         return $node;
     }
 }
