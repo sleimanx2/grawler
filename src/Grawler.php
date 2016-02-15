@@ -49,7 +49,13 @@ class Grawler
             return "";
         }
 
-        $title = $this->DOM->filter($path)->first()->text();
+        $filter = $this->DOM->filter($path);
+
+        if ($filter->count()) {
+            $title = $filter->first()->text();
+        } else {
+            $title = null;
+        }
 
         return $title;
     }

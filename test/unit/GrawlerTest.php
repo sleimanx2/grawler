@@ -15,7 +15,6 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('default title', $title);
     }
 
-
     /** @test */
     function it_can_extract_the_selected_title_from_dom()
     {
@@ -24,6 +23,16 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $title = $grawler->title('h1');
 
         $this->assertEquals('selected title', $title);
+    }
+
+    /** @test */
+    function it_returns_null_if_the_title_path_is_wrong()
+    {
+        $grawler = $this->initGrawler('title-dom');
+
+        $title = $grawler->title('none');
+
+        $this->assertEquals(null, $title);
     }
 
     /** @test */
