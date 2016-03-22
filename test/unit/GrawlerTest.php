@@ -23,16 +23,20 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $title = $grawler->title('h1');
 
         $this->assertEquals('selected title', $title);
+
+        $title = $grawler->title();
+
+        $this->assertEquals('default title', $title);
     }
 
     /** @test */
-    function it_returns_null_if_the_title_path_is_wrong()
+    function it_returns_the_default_title_if_the_title_path_is_wrong()
     {
         $grawler = $this->initGrawler('title-dom');
 
-        $title = $grawler->title('none');
+        $title = $grawler->title('invalid path');
 
-        $this->assertEquals(null, $title);
+        $this->assertEquals('default title', $title);
     }
 
     /** @test */

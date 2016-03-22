@@ -54,7 +54,8 @@ class Grawler
         if ($filter->count()) {
             $title = $filter->first()->text();
         } else {
-            $title = null;
+            $filter = $this->DOM->filter('title');
+            $title = $filter->count() ? $filter->first()->text() : "";
         }
 
         return $title;

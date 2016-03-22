@@ -43,10 +43,14 @@ class SoundCloudResolver extends Resolver
 
         $soundcloud = new Soundcloud($this->config()->get('soundcloudKey'), $this->config()->get('soundcloudSecret'));
 
+
         // if we have the track id get info directly else if the id is a string try to resolve the url and retry
         // with the retrieved id
         if (ctype_digit($this->id)) {
+
+
             $response = $soundcloud->get('/tracks/' . $this->id)->request()->bodyArray();
+
 
         } elseif (is_string($this->id)) {
             $response = $soundcloud->get('/resolve', ['url' => $this->url])->request()->bodyArray();
