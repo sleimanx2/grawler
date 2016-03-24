@@ -92,7 +92,7 @@ class Grawler
             return new MediaCollection([]);
         }
         
-        $attributes = ['data-image', 'data-url', 'data-src', 'data-highres', 'src', 'href'];
+        $attributes = ['data-image', 'data-url', 'data-src', 'data-pin-media', 'data-highres', 'src', 'href'];
 
         $links = $this->generateLinks($path, $attributes);
 
@@ -223,14 +223,14 @@ class Grawler
             return false;
         }
         $ext = strtolower(trim(substr($url, $pos)));
-        $imgExts = array(
+        $imgExts = [
             '.gif',
             '.jpg',
             '.jpeg',
             '.png',
             '.tiff',
             '.tif',
-        );
+        ];
 
         // this is far from complete but that's always going to be the case...
         if (in_array($ext, $imgExts)) {
