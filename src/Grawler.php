@@ -91,13 +91,12 @@ class Grawler
         if (!$path) {
             return new MediaCollection([]);
         }
-
-
+        
         $attributes = ['data-image', 'data-url', 'data-src', 'data-highres', 'src', 'href'];
 
         $links = $this->generateLinks($path, $attributes);
 
-        $links = array_filter($links,function ($link) {
+        $links = array_filter($links, function ($link) {
             return $this->isImage($link->getUri());
         });
 
@@ -105,7 +104,7 @@ class Grawler
             return (new Image($link->getUri()))->loadConfig($this->config());
         }, $links);
 
-        return new MediaCollection($images);
+        return new MediaCollection(array_values($images));
     }
 
     /**
