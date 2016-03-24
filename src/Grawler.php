@@ -97,6 +97,10 @@ class Grawler
 
         $links = $this->generateLinks($path, $attributes);
 
+        $links = array_filter($links,function ($link) {
+            return $this->isImage($link->getUri());
+        });
+
         $images = array_map(function ($link) {
             return (new Image($link->getUri()))->loadConfig($this->config());
         }, $links);
@@ -206,4 +210,34 @@ class Grawler
         return array_values(array_unique(array_filter($links)));
     }
 
+    /**
+     * Checks if the url type is an image.
+     *
+     * @param string $url
+     *
+     * @return bool
+     */
+    private function isImage($url)
+    {
+        $pos = strrpos($url, '.');
+        if ($pos === false) {
+            return false;
+        }
+        $ext = strtolower(trim(substr($url, $pos)));
+        $imgExts = array(
+            '.gif',
+            '.jpg',
+            '.jpeg',
+            '.png',
+            '.tiff',
+            '.tif',
+        );
+
+        // this is far from complete but that's always going to be the case...
+        if (in_array($ext, $imgExts)) {
+            return true;
+        }
+
+        return false;
+    }
 }
