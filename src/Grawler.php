@@ -35,6 +35,8 @@ class Grawler
     {
         $this->DOM = $DOM;
         $this->uri = $uri;
+
+        $this->clearNoneHumanTags();
     }
 
     /**
@@ -91,7 +93,7 @@ class Grawler
         if (!$path) {
             return new MediaCollection([]);
         }
-        
+
         $attributes = ['data-image', 'data-url', 'data-src', 'data-pin-media', 'data-highres', 'src', 'href'];
 
         $links = $this->generateLinks($path, $attributes);
@@ -238,5 +240,19 @@ class Grawler
         }
 
         return false;
+    }
+
+    /**
+     * clear all html tags that aren't human readable
+     */
+    protected function clearNoneHumanTags()
+    {
+        $filter = $this->DOM->filter('script');
+
+        $filter->each(function (Crawler $crawler) {
+            foreach ($crawler as $node) {
+                $node->parentNode->removeChild($node);
+            }
+        });
     }
 }
