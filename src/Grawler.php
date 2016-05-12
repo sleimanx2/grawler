@@ -40,6 +40,16 @@ class Grawler
     }
 
     /**
+     * return the parent DOMDocument
+     *
+     * @return \DOMDocument
+     */
+    public function document()
+    {
+      return $this->DOM->getNode(0)->parentNode;
+    }
+
+    /**
      * extract title from dom given a path
      *
      * @param null|string $path
