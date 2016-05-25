@@ -46,7 +46,32 @@ class Grawler
      */
     public function document()
     {
-      return $this->DOM->getNode(0)->parentNode;
+        return $this->DOM->getNode(0)->parentNode;
+    }
+
+    /**
+     * Extract the meta keywords from document
+     */
+    public function keywords()
+    {
+        $keywords = explode(',', $this->DOM->filter("meta[name='keywords']")->attr('content'));
+
+        $keywords = array_map(function ($keyword) {
+            return strtolower(trim($keyword));
+        }, $keywords);
+
+        return $keywords;
+    }
+
+
+    /**
+     * Extract the meta description from document
+     */
+    public function description()
+    {
+        $description = $this->DOM->filter("meta[name='description']")->attr('content');
+
+        return $description;
     }
 
     /**

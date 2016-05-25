@@ -5,6 +5,37 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class GrawlerTest extends PHPUnit_Framework_TestCase
 {
+
+    /** @test */
+    function it_can_extract_meta_keywords_from_dom()
+    {
+        $grawler = $this->initGrawler('meta-keywords-dom');
+
+        $keywords = $grawler->keywords();
+
+        $this->assertCount(20, $keywords);
+
+        $this->assertArraySubset([
+            'breaking news',
+            'news online',
+            'u.s. news',
+            'world news',
+            'developing story'
+        ], $keywords);
+    }
+
+
+    /** @test */
+    function it_can_extract_meta_description_from_dom()
+    {
+        $grawler = $this->initGrawler('meta-description-dom');
+
+        $description = $grawler->description();
+
+        $this->assertEquals("Find the latest breaking news and information on the top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN provides special reports, video, audio, photo galleries, and interactive guides."
+            , $description);
+    }
+
     /** @test */
     function it_can_extract_the_default_title_from_dom()
     {
@@ -58,7 +89,7 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
     /** @test */
     function it_can_extract_the_selected_links_from_dom()
     {
-        $grawler = $this->initGrawler('links-dom','http://example.com/news/latest/');
+        $grawler = $this->initGrawler('links-dom', 'http://example.com/news/latest/');
 
         $links = $grawler->links('.latest-articles');
 
@@ -74,7 +105,7 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/news/news-2', $links[1]->uri);
         $this->assertEquals('http://example.com/news-3', $links[2]->uri);
 
-        $this->assertEquals([],$grawler->links(""));
+        $this->assertEquals([], $grawler->links(""));
     }
 
 

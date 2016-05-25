@@ -35,6 +35,16 @@ $grawler->title();
 $grawler->body($path = '.main-content');
 ```
 
+```php
+// extracts meta keywords (array)
+$grawler->keywords();
+```
+
+```php
+// extracts meta description 
+$grawler->description();
+```
+
 ##### finding media
 
 ```php
