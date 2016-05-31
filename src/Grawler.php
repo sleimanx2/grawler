@@ -238,7 +238,13 @@ class Grawler
                     $linkNode->setAttribute('href', $url);
                     $linkNode->setAttribute('alt', $node->attr('alt'));
 
-                    return new Link($linkNode, $this->uri);
+                    $link = new Link($linkNode, $this->uri);
+
+                    if (filter_var($link->getUri(), FILTER_VALIDATE_URL) == false) {
+                        return null;
+                    }
+
+                    return $link;
                 }
             }
         });

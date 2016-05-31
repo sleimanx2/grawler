@@ -101,6 +101,8 @@ class GrawlerTest extends PHPUnit_Framework_TestCase
 
         $links = $grawler->links('.post-link');
 
+        $this->assertEquals(3, count($links));
+
         $this->assertEquals('http://example.com/news/latest/news-1', $links[0]->uri);
         $this->assertEquals('http://example.com/news/news-2', $links[1]->uri);
         $this->assertEquals('http://example.com/news-3', $links[2]->uri);
