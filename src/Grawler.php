@@ -240,7 +240,7 @@ class Grawler
 
                     $link = new Link($linkNode, $this->uri);
 
-                    if (filter_var($link->getUri(), FILTER_VALIDATE_URL) == false) {
+                    if (!$this->validateUrl($link)) {
                         return null;
                     }
 
@@ -250,6 +250,16 @@ class Grawler
         });
 
         return array_values(array_unique(array_filter($links)));
+    }
+
+
+    private function validateUrl($url) {
+
+        $path = parse_url($url, PHP_URL_PATH);
+        $encoded_path = array_map('urlencode', explode('/', $path));
+        $url = str_replace($path, implode('/', $encoded_path), $url);
+
+        return filter_var($url, FILTER_VALIDATE_URL) ? true : false;
     }
 
     /**
