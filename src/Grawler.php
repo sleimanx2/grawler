@@ -129,7 +129,7 @@ class Grawler
             return new MediaCollection([]);
         }
 
-        $attributes = ['data-image', 'data-url', 'data-src', 'data-pin-media', 'data-highres', 'src', 'href'];
+        $attributes = ['data-image', 'data-url', 'data-src', 'data-pin-media', 'data-highres', 'data-pk-src' ,'src', 'href'];
 
         $links = $this->generateLinks($path, $attributes);
 
