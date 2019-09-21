@@ -266,6 +266,7 @@ class Grawler
             return false;
         }
 
+
         $ext = explode("?",strtolower(trim(substr($url, $pos))))[0];
 
         $imgExts = [
