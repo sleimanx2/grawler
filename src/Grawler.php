@@ -265,7 +265,9 @@ class Grawler
         if ($pos === false) {
             return false;
         }
-        $ext = strtolower(trim(substr($url, $pos)));
+
+        $ext = explode("?",strtolower(trim(substr($url, $pos))))[0];
+
         $imgExts = [
             '.gif',
             '.jpg',
